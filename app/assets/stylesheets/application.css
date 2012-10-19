@@ -78,3 +78,13 @@ body{
 .nav-category div {
   margin-left: 0 !important;
 }
+
+.carousel .slide {
+  min-height: 280px !important;
+}
+.carousel-inner {
+  height: 280px !important;
+}
+.pull-down {
+  margin-top: 30px !important;
+}
