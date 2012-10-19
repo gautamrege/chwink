@@ -102,7 +102,7 @@ class ChwinksController < ApplicationController
     comment.user = current_user
     comment.save
 
-    render :json => {:nickname => current_user.nickname, :chwink_id => chwink.slug, :chwink_name => chwink.name}
+    render :json => {:nickname => current_user.nickname, :chwink_id => chwink.slug, :chwink_name => chwink.name, :profile_image => current_user.image}
   end
 
   def vote
