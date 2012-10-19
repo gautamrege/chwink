@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_categories
-    @categories = []#Category.all
+    @categories = Category.all
   end
 
   def login_required
