@@ -1,0 +1,42 @@
+#page-content{:style => "margin-left: 10px;"}
+  .row-fluid
+    .span6
+      %img{:src => "/assets/products_placeholder.png"}
+    .span6
+      .chwink-title
+        What our Chilren Will Never Know
+      .chwink-subtitle
+        Wouldn't it be great to have all the things our children would never know under one roof? Chwink is informative, collaborative and fun!!
+  .row-fluid
+    .span8
+      #carousel.well.home-wells.carousel.slide
+        .row-fluid.home-product.carousel-inner
+          - is_first = true
+          - @chwinks.each do |chwink|
+            .item{:class => is_first ? 'active' : ''}
+              - is_first = false
+              .span5
+                .polaroid
+                  .polaroid-img
+                    %img{:src => "#{chwink.image.url(:small)}"}
+                  .row-fluid.image-info
+                    .span4.date
+                      #{chwink.ranking.first}
+              .span7
+                %h2.product-title
+                  #{chwink.name}
+                .product-info
+                  #{chwink.description}
+        %a.left-arrow.left{:href => '#carousel', 'data-slide' => 'prev'}
+        %a.right-arrow.right{:href => '#carousel', 'data-slide' => 'next' }
+    .span4
+      .well.home-wells.did-you-know
+        .title
+          Did You Know?
+        .info
+          %img.pull-right{:src => "/assets/ham_radio.jpg"}
+          %p 
+            During World War II, priest Fr. Maximilian Kolbe, SP3RN was arrested by the Germans and they believed his amateur
+            %b HAM radio 
+            activities were involved in espionage. After some prisoners escaped in 1941, the Germans ordered 10 prisoners be killed in retribution. Fr. Kolbe was martyred when he volunteered to take the place of one of the condemned men.
+          %h5 Save these Chwinks for our children

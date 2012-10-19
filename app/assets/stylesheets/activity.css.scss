@@ -1,0 +1,18 @@
+#activitywindow {
+  position: relative;
+  height: 200px;
+}
+
+#messagewindow{
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 200px;
+}
+
+#messagewindow {
+  overflow: auto;
+  top: 0;
+}
+
+

@@ -1,0 +1,80 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+body{
+  padding-top: 1px !important;
+}
+.twitter-button{
+  position: relative;
+  left: 10px;
+  top: 0px;
+}
+.sized-embed{
+  width:640px !important;
+  height:510px !important;
+  background: whiteSmoke !important;
+  border: 1px solid #E3E3E3 !important;
+}
+.vco-timeline{
+  background: whiteSmoke !important;
+  border: 1px solid #E3E3E3 !important;
+}
+.vco-timeline .vco-navigation .timenav .content .marker .flag {
+    width:50px !important;
+}
+.vco-slider .nav-previous .icon {
+  background: url("arrow_left.png") no-repeat !important;
+  height: 38px !important;
+  margin-left: 5px !important;
+}
+.vco-slider .nav-next .icon {
+  background: url("arrow_right.png") no-repeat transparent !important;
+  height: 38px !important;
+  margin-left: 75px !important;
+}
+.vco-slider .slider-container-mask{
+  height: 300px !important;
+}
+.polaroid.row-fluid .image-info .name {
+  margin-right: 10px !important;
+}
+.row-fluid .image-info .user-name {
+  font-size: 13px;
+}
+
+.new-year {
+  margin-left: 18px;
+  position: relative;
+  height: 25px;
+}
+
+.row-fluid .image-info img {
+  height: 16px;
+  width: 16px;
+}
+.cateogry {
+  width: 150px !important;
+  margin-left: 180px;
+  margin-top: 20px;
+}
+#chwink_comment {
+  width: 400px !important;
+}
+
+.modal .modal-header h3 {
+  color: #F43705;
+}
+
+.nav-category div {
+  margin-left: 0 !important;
+}

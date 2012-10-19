@@ -1,0 +1,57 @@
+!!! 5
+%html{:lang => "en"}
+  %head
+    %title Chwink
+    = stylesheet_link_tag "application", :media => "all"
+    = yield :stylesheets
+    = javascript_include_tag "application", "http://#{request.host}:9292/faye.js"
+    %script
+      var client = new Faye.Client("http://" + window.location.hostname +":9292/faye");
+    = yield :javascripts
+    = csrf_meta_tags
+
+  %body
+    .container-fluid
+      #header.lifted-corners
+        .corner-holder
+          .row-fluid
+            .span4
+              %a.logo.pull-left{:href => "/"}
+            .span.header-elements
+              %a.btn.btn-large.btn-categories{"data-content" => "#{raw render('chwinks/categories')}", :href => "#", :rel => "popover", :title => ""} 
+                %i.icon.icon-arrow-down
+                Categories
+              / .accordion.cateogry
+              /   .accordion-group
+              /     .accordion-heading
+              /       = link_to "<i class='icon-arrow-down'></i> Categories".html_safe, "#category_selection", data: {parent: "#category_selection", toggle: "collapse"}, class: 'accordion-toggle'
+              /     .add-column.accordion-body.collapse#category_selection
+              /       = render 'chwinks/categories'
+            .span.header-elements
+              = form_for Chwink.new, :url => '/chwinks/search', :html => {:class => 'form-search header-search pull-right'}, :method => 'post' do |f|
+                .input-append
+                  %input.input-medium.search-query{:type => "text", :name => 'query', :id => 'query'}
+                  %button.btn{:type => "submit"} Search
+            
+            .span.header-elements
+              - if current_user.blank?
+                %a{href: '/auth/twitter', class: 'twitter-button'}
+                  %img{src: 'https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png'}            
+              - else
+                = "@#{current_user.nickname}"
+                %a{href: destroy_user_session_path, class: 'twitter-button'}
+                  %img{src: '/assets/signout_button.png'}  
+          
+
+      = yield
+
+      #footer.lifted-corners
+        .corner-holder
+          .pull-left
+            Copyright  &copy; 2012
+          .pull-right
+            %a{:href => "javascript:void(0);", :onclick => "window.open('http://www.facebook.com/sharer.php?u=#{HOST_URL}', 'newWindow', 'width=816, height=523'); return false;"}
+              %img{:src => '/assets/facebook.png'}
+            %a{:href => "javascript:void(0);", :onclick => "window.open('http://twitter.com/home?status=What our children will never know  #{HOST_URL}', 'newWindow', 'width=816, height=523'); return false;"}
+              %img{:src => '/assets/twitter.png'}
+          

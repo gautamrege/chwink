@@ -1,0 +1,39 @@
+.well.home-wells
+  .well-head
+    Chwink Details
+  = simple_form_for @chwink,  html: {multipart:true} do |f|
+    .row-fluid
+      .span4 Name *
+      .span
+        = f.input :name, label: false, input_html: {class: 'input-medium', placeholder: 'Chwink Name'}
+    .row-fluid
+      .span4 Image 
+      .span2 
+        = f.file_field :image, label: false, class: "input-medium"
+    .row-fluid
+      .span4 End Year *
+      .span1
+        = f.input :end_year, label: false, input_html: {class: 'input medium', placeholder: '1998', style: "width:150px;"}
+    .row-fluid
+      .span4 Category *
+      .span
+        .control-group
+          .controls
+            = f.association :category, label: false, collection: Category.all, prompt: "Choose the category", required: true, input_html:{ class: "input-medium"} 
+    .row-fluid
+      .span4
+        Description
+      .span
+        .control-group
+          %label.control-label{:for => "textarea"}
+          .controls
+            //%textarea#textarea.input-medium{:rows => "4"}
+            = f.input :description, label: false, :as => :text, input_html: { class: 'input-medium', rows: '4' } 
+    .row-fluid        
+      %strong Edits are obsolete ;) Create with care!
+      = f.submit 'Chwink It!', class: 'btn btn-medium btn-chwink-orange btn-submit-chwink'
+        
+        
+
+
+  

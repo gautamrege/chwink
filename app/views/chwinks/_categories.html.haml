@@ -1,0 +1,5 @@
+.row-fluid.nav-category
+  - @categories.each do |category|
+    .span6
+      %a{:href => "#{category_chwinks_url(category)}"}= category.name
+
