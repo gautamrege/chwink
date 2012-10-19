@@ -17,9 +17,11 @@ class ChwinksController < ApplicationController
       first = Chwink.find(params[:id])
       chwinks = Chwink.similar(first.name)
     end
+    absolete_text = "obsoleted" 
     chwinks.each do |chwink|
       facebook_url = "#{FACEBOOK_SHARE_URL}#{HOST_URL}chwinks/#{chwink.slug}"
-      twitter_url = "#{TWITTER_SHARE_URL}#{chwink.name} #{HOST_URL}chwinks/#{chwink.slug}"
+      absolete_text = Date.today.year < chwink.end_year ? "was obsoleted since #{chwink.end_year}" : "will be obsolete from #{chwink.end_year}"
+      twitter_url = "#{TWITTER_SHARE_URL}#{chwink.name} #{absolete_text}  #{HOST_URL}chwinks/#{chwink.slug}"
       hash ={"startDate" => chwink.ranking.first.to_s, 
             "endDate" => chwink.ranking.first.to_s, 
             "headline" => chwink.name, 
