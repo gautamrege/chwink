@@ -1,0 +1,13 @@
+#commentlist
+  #commentwindow
+    %ul
+    - @comments.each do |comment|
+      %li.activity
+        %a{:href => "#{chwink_path(comment.chwink)}"} 
+          = comment.chwink.name
+        \:
+        %img{ :src => "#{comment.user.image}", :height => "16px", :width => "16px"}
+        = comment.user.name
+        says, '
+        = comment.comment
+        \'  
