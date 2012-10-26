@@ -5,6 +5,7 @@ class ChwinksController < ApplicationController
   def index
     @chwink = Chwink.new
     @slide_index = 0
+    @comments = []
     @chwinks = {"timeline" =>{"date" => []}}
     if params[:query].blank? and params[:category_id].blank? and params[:id].blank?
       chwinks = Chwink.all
@@ -44,6 +45,7 @@ class ChwinksController < ApplicationController
             }
       } 
       @chwinks["timeline"]["date"] << hash
+      @comments << chwink.comments
     end
     first = chwinks.first if first.blank?
     facebook_url = "#{FACEBOOK_SHARE_URL}#{HOST_URL}chwinks/#{first.slug}"
@@ -62,12 +64,14 @@ class ChwinksController < ApplicationController
                               "user_image" => first.user.try(:image), 
                               "facebook_link" => facebook_url, 
                               "twitter_link" => twitter_url}
+    @comments = @comments.flatten
     @chwinks = @chwinks.to_json
   end
 
   def show
     redirect_to chwinks_path(:id => params[:id])
   end
+
 
   def create
     @chwink = Chwink.new(params[:chwink])

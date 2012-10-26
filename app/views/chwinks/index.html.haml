@@ -26,6 +26,12 @@
             = link_to "<i class='icon-arrow-down'> </i> Activity".html_safe, "#activity_section", data: {parent: "#add_chwink_activity", toggle: "collapse"}, class: 'accordion-toggle'
           .add-column.accordion-body.collapse#activity_section  
             = render "activity"
+        .accordion-group
+          .accordion-heading
+            = link_to "<i class='icon-arrow-down'></i> Comments".html_safe, "#comments_section", data: {parent: "#add_chwink_activity", toggle: "collapse"}, class: 'accordion-toggle'
+          .add-column.accordion-body.collapse#comments_section
+            = render "list_comments"
+
 = render 'comments'
 :javascript
   
