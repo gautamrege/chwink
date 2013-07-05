@@ -26,7 +26,7 @@ class Chwink
   has_many :comments
   
   slug :name
-  validates :name, presence: true
+  validates :name, :user_id, :category_id, :_slugs, presence: true
   validates :end_year, presence: true, length: { is: 4 }
 
 
