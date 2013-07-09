@@ -1,4 +1,4 @@
 jQuery ($) ->
-	$(".btn-categories").popover(
-		"placement":"bottom",
-		"html":true)
+  $(".btn-categories").popover(
+    "placement":"bottom",
+    html: true)
