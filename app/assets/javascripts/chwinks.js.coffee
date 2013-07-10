@@ -10,9 +10,9 @@ jQuery ->
       unless data["recent_activity"]["data"].length is 0
         $.each data["recent_activity"]["data"], (index, recent_actv) ->
           $("#messagewindow").append "<li class='activity'>" + recent_actv.message + "</li>"
-  $('.chwink-comment').live 'click', -> 
+  $('.chwink-comment').on 'click', -> 
     $('#new_comment').attr('action','/chwinks/'+$(this).attr('id')+'/comment')
-  $('#add_comment').live 'click', -> 
+  $('#add_comment').on 'click', -> 
     $('#new_comment').submit()
   $('#new_comment').on 'ajax:success', (event, data, status, xhr) ->
     $('#chwink_comment').modal('hide')

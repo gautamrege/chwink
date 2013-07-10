@@ -46,12 +46,19 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
-
+  
+  #Provider field
+  field :provider, type: String
   has_one :authentication, :dependent => :delete
 
   def apply_omniauth(user_hash)
     self.name = user_hash[:info][:name]
-    self.email = user_hash[:info][:nickname] + '@custom_twitter.com'
+    self.provider = user_hash[:provider]
+    if self.provider == 'twitter'
+      self.email = user_hash[:info][:nickname] + '@custom_twitter.com'
+    else
+      self.email = user_hash[:info][:nickname] + '@custom_facebook.com'
+    end
     self.nickname = user_hash[:info][:nickname]
 
     self.first_name = user_hash[:info][:first_name]

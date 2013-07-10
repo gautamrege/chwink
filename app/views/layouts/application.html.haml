@@ -18,7 +18,7 @@
             .span4
               %a.logo.pull-left{:href => "/"}
             .span.header-elements
-              %a.btn.btn-large.btn-categories{"data-content" => "#{raw render('chwinks/categories')}", :href => "#", :rel => "popover", :title => ""} 
+              %a.btn.btn-categories{"data-content" => "#{raw render('chwinks/categories')}", :href => "#", rel: "popover" ,:title => ""} 
                 %i.icon.icon-arrow-down
                 Categories
               / .accordion.cateogry
@@ -35,12 +35,15 @@
             
             .span.header-elements
               - if current_user.blank?
-                %a{href: '/auth/twitter', class: 'twitter-button'}
-                  %img{src: 'https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png'}            
+                %a.btn.btn-categories{href: "#", rel: "popover", "data-content"=> "#{raw render('chwinks/login')}",:title => ""}
+                  %i.icon.icon-arrow-down
+                  Login
+                  /%img{src: 'https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png'}            
               - else
-                = "@#{current_user.nickname}"
+                = "#{current_user.name}"
                 %a{href: destroy_user_session_path, class: 'twitter-button'}
-                  %img{src: '/assets/signout_button.png'}  
+                  Signout
+                  /%img{src: '/assets/signout_button.png'}  
           
 
       = yield
@@ -54,4 +57,3 @@
               %img{:src => '/assets/facebook.png'}
             %a{:href => "javascript:void(0);", :onclick => "window.open('http://twitter.com/home?status=What our children will never know  #{HOST_URL}', 'newWindow', 'width=816, height=523'); return false;"}
               %img{:src => '/assets/twitter.png'}
-          
