@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 gem 'rake', '0.9.2.2'
 gem 'devise', '2.1.2'
-gem 'oauth2'
+#gem 'oauth2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -58,11 +58,11 @@ gem "bson_ext"
 gem "mongoid"
 gem "omniauth"#, "~> 1.0.0"
 gem 'omniauth-twitter'#, :git => 'https://github.com/arunagw/omniauth-twitter.git'
+gem 'omniauth-facebook'
 gem "mongoid-paperclip", :require => 'mongoid_paperclip'
 gem "rmagick", "~> 2.13.1"
 gem "mongoid-history"
 gem "simple_form"
 gem 'mongoid_slug'
-
 # Deployment
 gem 'mina'
