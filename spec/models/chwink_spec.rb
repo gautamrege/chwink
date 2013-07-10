@@ -48,9 +48,6 @@ describe Chwink do
       chwinks1.should_be valid
     end
 
-    it "should not search with stopwords" 
-      #Results for "mychwink" should be same as "these are like mychwinks"
-    
     it "should return empty Array if nothing is found" do
       pending
       query = "non-existent chwink"
@@ -58,12 +55,6 @@ describe Chwink do
       chwinks1.first.save
       chwinks1.should_be not_valid
     end
-  end
-
-  context "similar chwinks" do
-    it "should show similar chwinks on selection" 
-    it "not select itself as similar chwink"
-    it "should not have remnant M/R collections"
   end
 
   context "ranking" do
@@ -92,9 +83,6 @@ describe Chwink do
       5.times {chwink.vote(:up => "2013")}
       expect(chwink.ranking).to eq(["2013","2011","2012","2020"])
     end
-     "should have top 5 ranks stored, not calculated"
-     "should have top rank stored, not calculated"
-     "should verify changes in year ranking after every update"
   end
 
 end

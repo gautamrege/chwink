@@ -6,6 +6,7 @@ class ChwinksController < ApplicationController
     @chwink = Chwink.new
     @slide_index = 0
     @comments = []
+    @count_chwinks = 0
     @chwinks = {"timeline" =>{"date" => []}}
     if params[:query].blank? and params[:category_id].blank? and params[:id].blank?
       chwinks = Chwink.all
@@ -18,7 +19,8 @@ class ChwinksController < ApplicationController
       first = Chwink.find(params[:id])
       chwinks = Chwink.similar(first.name)
     end
-    absolete_text = "obsoleted" 
+    @count_chwinks = chwinks.count
+    absolete_text = "obsoleted"
     chwinks.each do |chwink|
       facebook_url = "#{FACEBOOK_SHARE_URL}#{HOST_URL}chwinks/#{chwink.slug}"
       absolete_text = Date.today.year < chwink.end_year ? "was obsoleted since #{chwink.end_year}" : "will be obsolete from #{chwink.end_year}"
@@ -48,24 +50,33 @@ class ChwinksController < ApplicationController
       @comments << chwink.comments
     end
     first = chwinks.first if first.blank?
-    facebook_url = "#{FACEBOOK_SHARE_URL}#{HOST_URL}chwinks/#{first.slug}"
-    twitter_url = "#{TWITTER_SHARE_URL}#{first.name}#{HOST_URL}chwinks/#{first.slug}"
-    #@chwinks["timeline"]["headline"] = first.name
-    @chwinks["timeline"]["type"] = "default"
-    #@chwinks["timeline"]["text"] = first.description
-    @chwinks["timeline"]["startDate"] = first.ranking.first.to_s
-    @chwinks["timeline"]["slug"] = first.slug
-    @chwinks["timeline"]["votes"] = { "ranking" => first.ranking } 
-    @chwinks["timeline"]["asset"] = {"media" => first.image.url(:small), 
-                              "thumbnail" => first.image.url(:thumb), 
-                              "caption" => first.category.name, 
-                              "credit" => first.user.try(:name), 
-                              "type" => "image", 
-                              "user_image" => first.user.try(:image), 
-                              "facebook_link" => facebook_url, 
-                              "twitter_link" => twitter_url}
-    @comments = @comments.flatten
-    @chwinks = @chwinks.to_json
+    if first.blank? == false
+      facebook_url = "#{FACEBOOK_SHARE_URL}#{HOST_URL}chwinks/#{first.slug}"
+      twitter_url = "#{TWITTER_SHARE_URL}#{first.name}#{HOST_URL}chwinks/#{first.slug}"
+      @chwinks["timeline"]["headline"] = first.name
+      @chwinks["timeline"]["type"] = "default"
+      @chwinks["timeline"]["text"] = first.description
+      @chwinks["timeline"]["startDate"] = first.ranking.first.to_s
+      @chwinks["timeline"]["slug"] = first.slug
+      @chwinks["timeline"]["votes"] = { "ranking" => first.ranking } 
+      @chwinks["timeline"]["asset"] = {"media" => first.image.url(:small), 
+                                "thumbnail" => first.image.url(:thumb), 
+                                "caption" => first.category.name, 
+                                "credit" => first.user.try(:name), 
+                                "type" => "image", 
+                                "user_image" => first.user.try(:image), 
+                                "facebook_link" => facebook_url, 
+                                "twitter_link" => twitter_url}
+      @comments = @comments.flatten
+      @chwinks = @chwinks.to_json
+    else
+      if params[:category_id] 
+        flash[:alert] = ["No Chwinks were found for this category","Would u like to create one"]
+      else
+        flash[:alert] = ["No Chwinks were found for ur search result"]
+      end
+      redirect_to root_path
+    end
   end
 
   def show
@@ -78,9 +89,9 @@ class ChwinksController < ApplicationController
     @chwink.user = current_user
     @chwink.save
     if @chwink.errors.any?
-      flash[:notice] = "Chwink added successfully"
+      flash[:alert] = @chwink.errors.full_messages
     else
-      flash[:errors] = "some error occured while adding chwink"
+      flash[:notice] = "Chwink added successfully"
     end
     session[:action] = "create"
     session[:user_id] = current_user.id
