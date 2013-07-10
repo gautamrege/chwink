@@ -49,9 +49,9 @@ IMAGES = {
   "Maps and World Atlas" => "http://www.worldpress.org/images/maps/world_600w.jpg",
   "World Globe" => "http://upload.wikimedia.org/wikipedia/commons/e/ee/World_globe.jpg",
   "Light Bulb" => "http://www.businesspundit.com/wp-content/uploads/2009/07/zzlightbulb.jpg",
-  "Mosquitoes" => "http://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Mosquito_2007-2.jpg/220px-Mosquito_2007-2.jpg",
-  "House Fly" => "http://www.dontwaste.com.au/wp-content/themes/shopperpress/thumbs/HouseFlyLg.jpg",
-  "Bengal Tiger" => "http://www.karmakerala.com/news/wp-content/uploads/2010/03/bengal_tiger_31.jpg"
+  "Mosquitoes" => "http://farm2.static.flickr.com/1344/1387236619_5bcd3beaac.jpg",
+  "House Fly" => "http://farm2.static.flickr.com/1344/1387236619_5bcd3beaac.jpg",
+  "Bengal Tiger" => "http://farm2.static.flickr.com/1344/1387236619_5bcd3beaac.jpg"
 }
 
 IMAGES.each do |name, image|
@@ -61,4 +61,4 @@ IMAGES.each do |name, image|
 end
 
 # Setup initial random seed data for chwinks!
-200.times { c = Chwink.all.sample; c.vote({:up => (1980..2030).to_a.sample}) }
+#200.times { c = Chwink.all.sample; c.vote({:up => (1980..2030).to_a.sample}) }

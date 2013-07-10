@@ -14,3 +14,10 @@
 /log/*.log
 /tmp
 config/initializers/omniauth.rb
+
+#ignore vim swap files
+*.swp
+*.swo
+
+# Ignore image assets
+public/system/chwinks/images
