@@ -35,7 +35,7 @@
             
             .span.header-elements
               - if current_user.blank?
-                %a.btn.btn-categories{href: "#", rel: "popover", "data-content"=> "#{raw render('chwinks/login')}",:title => "Login"}
+                %a.btn.btn-categories{href: "#", rel: "popover", "data-content"=> "#{raw render('chwinks/login')}", title: 'Sign In'}
                   %i.icon.icon-arrow-down
                   Login
                   /%img{src: 'https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png'}            

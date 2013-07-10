@@ -11,8 +11,7 @@ describe ChwinksController do
                                       credentials: { token: "lk2j3lkjasldkjflk3ljsdf", secret: "1213434asdsdqwqwsqww"} })
     
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
-    visit root_path
-    click_link 'Login'
+    visit '/auth/twitter' 
     @user = User.last
   end
   
