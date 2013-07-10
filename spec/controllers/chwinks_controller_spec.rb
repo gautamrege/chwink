@@ -12,7 +12,7 @@ describe ChwinksController do
     
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
     visit root_path
-    click_link 'login'
+    click_link 'Login'
     @user = User.last
   end
   
