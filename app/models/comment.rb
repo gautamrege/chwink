@@ -20,5 +20,6 @@ class Comment
   scope :votes, where(:type => VOTE)
   scope :reviews, where(:type => REVIEW)
   scope :by_user, lambda { |user| where(user: user) }
-
+  
+  validates :comment , presence: true
 end
