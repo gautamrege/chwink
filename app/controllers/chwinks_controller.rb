@@ -116,8 +116,8 @@ class ChwinksController < ApplicationController
     comment.chwink = chwink
     comment.user = current_user
     comment.save
-
-    render :json => {:nickname => current_user.nickname, :chwink_id => chwink.slug, :chwink_name => chwink.name, :profile_image => current_user.image}
+    redirect_to chwinks_url(:id => chwink.slug)
+    #render :json => {:nickname => current_user.nickname, :chwink_id => chwink.slug, :chwink_name => chwink.name, :profile_image => current_user.image, :comment => comment.comment}
   end
 
   def vote
@@ -129,7 +129,7 @@ class ChwinksController < ApplicationController
       @vote.year = params[:year]
       @vote.save
     else
-      @vote = chwink.comments.create(user: current_user, type: Comment::VOTE, year: params[:year].to_i)
+      @vote = chwink.comments.create(user: current_user, type: Comment::VOTE, year: params[:year].to_i, comment: "Yay! I voted for #{chwink.name}")
       chwink.vote(:up => params[:year])
     end
   end
