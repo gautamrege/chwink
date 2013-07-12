@@ -1,4 +1,5 @@
 jQuery ($) ->
   $(".btn-categories").popover(
-    "placement":"left",
+    "placement":"bottom",
+    container: 'body',
     html: true)

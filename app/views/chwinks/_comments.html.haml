@@ -3,7 +3,7 @@
     %button.close{:type => 'button', :data => {:dismiss => "modal"}, :aria => {:hidden => "true"}}
     %h3 Add a comment
   .modal-body
-    = form_for(Comment.new, :url =>'#', :remote => true) do |f|
+    = form_for(Comment.new, url: '#', :remote => true) do |f|
       = f.text_area :comment, :rows => '5', :columns => '40', style: "width: 350px;"
   .modal-footer
     %button.btn.btn-primary.marginRight10{:type => "submit", :id => "add_comment"} &nbsp; Save &nbsp;

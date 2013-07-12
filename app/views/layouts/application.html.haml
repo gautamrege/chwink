@@ -18,7 +18,7 @@
             .span4
               %a.logo.pull-left{:href => "/"}
             .span.header-elements
-              %a.btn.btn-categories{"data-content" => "#{raw render('chwinks/categories')}", :href => "#", rel: "popover" ,:title => ""} 
+              %a.btn.btn-categories{"data-content" => "#{raw render('chwinks/categories')}", :href => "#", rel: "popover" ,:title => "Select Category"} 
                 %i.icon.icon-arrow-down
                 Categories
               / .accordion.cateogry
@@ -40,9 +40,9 @@
                   Login
                   /%img{src: 'https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png'}            
               - else
-                = "#{current_user.name}"
-                %a.btn.btn-warning{href: destroy_user_session_path, class: 'twitter-button'}
-                  Signout
+                = "#{current_user.name.split(' ').first}"
+                %a.btn.btn-info{href: destroy_user_session_path, class: 'twitter-button'}
+                  Logout
                   /%img{src: '/assets/signout_button.png'}  
       - if notice
         .alert.alert-success
