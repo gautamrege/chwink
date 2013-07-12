@@ -30,22 +30,30 @@
             .span.header-elements
               = form_for Chwink.new, :url => '/chwinks/search', :html => {:class => 'form-search header-search pull-right'}, :method => 'post' do |f|
                 .input-append
-                  %input.input-medium.search-query{:type => "text", :name => 'query', :id => 'query'}
+                  %input.input-medium.search-query{:type => "text", :name => 'query', :id => 'query', placeholder: 'Find Chwinks'}
                   %button.btn{:type => "submit"} Search
             
             .span.header-elements
               - if current_user.blank?
-                %a.btn.btn-categories{href: "#", rel: "popover", "data-content"=> "#{raw render('chwinks/login')}",:title => ""}
+                %a.btn.btn-categories{href: "#", rel: "popover", "data-content"=> "#{raw render('chwinks/login')}", title: 'Sign In'}
                   %i.icon.icon-arrow-down
                   Login
                   /%img{src: 'https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png'}            
               - else
                 = "#{current_user.name}"
-                %a{href: destroy_user_session_path, class: 'twitter-button'}
+                %a.btn.btn-warning{href: destroy_user_session_path, class: 'twitter-button'}
                   Signout
                   /%img{src: '/assets/signout_button.png'}  
-          
-
+      - if notice
+        .alert.alert-success
+          %strong= notice
+        %script
+          $(".alert-success").fadeOut(3000)
+      - if alert 
+        .alert.alert-error
+          %ul
+          - alert.each do |msg|
+            %li= msg
       = yield
 
       #footer.lifted-corners

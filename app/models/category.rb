@@ -5,5 +5,6 @@ class Category
 
   field :name, type: String
   slug :name
+  validates :name, presence: :true, uniqueness: :true
   has_many :chwinks
 end
