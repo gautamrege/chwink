@@ -10,11 +10,11 @@ jQuery ->
       unless data["recent_activity"]["data"].length is 0
         $.each data["recent_activity"]["data"], (index, recent_actv) ->
           $("#messagewindow").append "<li class='activity'>" + recent_actv.message + "</li>"
-  $('.chwink-comment').on 'click', -> 
+  $(document).on 'click','.chwink-comment', -> 
     $('#new_comment').attr('action','/chwinks/'+$(this).attr('id')+'/comment')
-  $('#add_comment').on 'click', -> 
+  $(document).on 'click','#add_comment', -> 
     $('#new_comment').submit()
-  $('#new_comment').on 'ajax:success', (event, data, status, xhr) ->
+  $(document).on 'ajax:success', '#new_comment',(event, data, status, xhr) ->
     $('#chwink_comment').modal('hide')
     user_image =  "<img width='16px' height ='16px' class='user_image' src= "+ data.profile_image + " />"
     message =  "<li class='activity'>" + user_image + " " +data.nickname + " commented on chiwnk " + "<a href = /chwinks/" + data.chwink_id + ">" + data.chwink_name + "</a> </li>"
