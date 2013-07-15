@@ -52,8 +52,10 @@
       - if alert 
         .alert.alert-error
           %ul
-          - alert.each do |msg|
-            %li= msg
+            - alert.each do |msg|
+              %li= msg 
+            - if alert[0].index('found') 
+              %a.btn.btn-medium.btn-chwink-orange.btn-submit-chwink{:href => "#{chwinks_path}" }I would like to create one!
       = yield
 
       #footer.lifted-corners
