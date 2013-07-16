@@ -45,10 +45,6 @@
                   Logout
                   /%img{src: '/assets/signout_button.png'}
 
-      - if current_user.blank?  
-        .alert.alert-info.some{align: 'center'}
-          Login to vote, comment and create Chwinks!!!
-      
       - if notice
         .alert.alert-success.some{align: 'center'}
           %strong= notice

@@ -10,6 +10,11 @@
   start_at_slide: #{@slide_index},
   });
   });
+
+- if current_user.blank?  
+  .alert.alert-info.some{align: 'center'}
+    Login to vote, comment and create Chwinks!!!
+      
 #page-content
   .row-fluid
     .span8.showmered
