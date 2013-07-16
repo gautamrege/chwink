@@ -29,6 +29,11 @@ describe Chwink do
       chwink.save
       chwink.should be_valid
     end
+    it "should have a unique name" do
+      chwink.save
+      c2 = Chwink.new(name: "Mychwink", end_year: "2020", category_id: "0987654334", user_id: "6789eywghd")
+      expect(c2).to have(1).errors_on(:name)
+    end
   end
   context "name keyword search" do
     it "should return similar chwinks based on name" do

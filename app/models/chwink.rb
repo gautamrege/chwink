@@ -28,7 +28,7 @@ class Chwink
   slug :name
   validates :name, :user_id, :category_id, presence: true
   validates :end_year, presence: true, length: { is: 4 }
-
+  validates :name, uniqueness: true
 
   before_create do |record|
     record.votes = { record.end_year.to_s => 1 }
