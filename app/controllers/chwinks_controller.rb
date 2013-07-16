@@ -71,7 +71,7 @@ class ChwinksController < ApplicationController
       @chwinks = @chwinks.to_json
     else
       if params[:category_id] 
-        flash[:alert] = ["No Chwinks were found for this category","Would u like to create one"]
+        flash[:alert] = ["No Chwinks were found for this category"]
       else
         flash[:alert] = ["No Chwinks were found for ur search result"]
       end
@@ -87,6 +87,7 @@ class ChwinksController < ApplicationController
   def create
     @chwink = Chwink.new(params[:chwink])
     @chwink.user = current_user
+    @chwink.description = 'New Chwink' if @chwink.description.blank?
     @chwink.save
     if @chwink.errors.any?
       flash[:alert] = @chwink.errors.full_messages

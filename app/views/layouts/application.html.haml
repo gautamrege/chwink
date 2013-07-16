@@ -45,15 +45,17 @@
                   Logout
                   /%img{src: '/assets/signout_button.png'}  
       - if notice
-        .alert.alert-success
+        .alert.alert-success.some{align: 'center'}
           %strong= notice
         %script
           $(".alert-success").fadeOut(3000)
       - if alert 
         .alert.alert-error
           %ul
-          - alert.each do |msg|
-            %li= msg
+            - alert.each do |msg|
+              %li= msg 
+            - if alert[0].index('found') 
+              %a.btn.btn-medium.btn-chwink-orange.btn-submit-chwink{:href => "#{chwinks_path}" }I would like to create one!
       = yield
 
       #footer.lifted-corners
