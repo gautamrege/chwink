@@ -53,20 +53,20 @@ class ChwinksController < ApplicationController
     if first.blank? == false
       facebook_url = "#{FACEBOOK_SHARE_URL}#{HOST_URL}chwinks/#{first.slug}"
       twitter_url = "#{TWITTER_SHARE_URL}#{first.name}#{HOST_URL}chwinks/#{first.slug}"
-      @chwinks["timeline"]["headline"] = first.name
+      @chwinks["timeline"]["headline"] = ""#first.name
       @chwinks["timeline"]["type"] = "default"
-      @chwinks["timeline"]["text"] = first.description
-      @chwinks["timeline"]["startDate"] = first.ranking.first.to_s
-      @chwinks["timeline"]["slug"] = first.slug
-      @chwinks["timeline"]["votes"] = { "ranking" => first.ranking } 
-      @chwinks["timeline"]["asset"] = {"media" => first.image.url(:small), 
-                                "thumbnail" => first.image.url(:thumb), 
-                                "caption" => first.category.name, 
-                                "credit" => first.user.try(:name), 
+      @chwinks["timeline"]["text"] = ""#first.description
+      @chwinks["timeline"]["startDate"] = ""#first.ranking.first.to_s
+      @chwinks["timeline"]["slug"] = ""#first.slug
+      @chwinks["timeline"]["votes"] = { "ranking" => ""}#first.ranking } 
+      @chwinks["timeline"]["asset"] = {"media" => "",#first.image.url(:small), 
+                                "thumbnail" => "",#first.image.url(:thumb), 
+                                "caption" => "",#first.category.name, 
+                                "credit" => "",#first.user.try(:name), 
                                 "type" => "image", 
-                                "user_image" => first.user.try(:image), 
-                                "facebook_link" => facebook_url, 
-                                "twitter_link" => twitter_url}
+                                "user_image" => "",#first.user.try(:image), 
+                                "facebook_link" => "",#facebook_url, 
+                                "twitter_link" => ""}#twitter_url}
       @comments = @comments.flatten
       @chwinks = @chwinks.to_json
     else
