@@ -32,7 +32,16 @@
                 .input-append
                   %input.input-medium.search-query{:type => "text", :name => 'query', :id => 'query', placeholder: 'Find Chwinks'}
                   %button.btn{:type => "submit"} Search
-            
+              
+                
+              %section{ id: 'search' }
+                = form_tag search_path, method: :get do
+                  = text_field_tag :query, params[:query], autocomplete: :off, placeholder: 'search for sumth'
+                  = submit_tag('Search')
+      
+              / %section.chwinks= render_chwinks(@chwinks) 
+
+
             .span.header-elements
               - if current_user.blank?
                 %a.btn.btn-categories{href: "#", rel: "popover", "data-content"=> "#{raw render('chwinks/login')}", title: 'Sign In'}
@@ -67,3 +76,4 @@
               %img{:src => '/assets/facebook.png'}
             %a{:href => "javascript:void(0);", :onclick => "window.open('http://twitter.com/home?status=What our children will never know  #{HOST_URL}', 'newWindow', 'width=816, height=523'); return false;"}
               %img{:src => '/assets/twitter.png'}
+      

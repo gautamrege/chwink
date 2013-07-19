@@ -29,4 +29,17 @@ module ChwinksHelper
     message = modifier + action + data  
     message.html_safe  
   end
+
+  def render_chwinks(chwinks)
+    if chwinks.to_a.size > 0
+      #render(chwinks)
+      chwinks.to_a.each do |chwink|
+        content_tag(:div, chwink.name, class: 'message')
+      end
+    else      
+      content_tag(:div, "No chwinks were found", class: 'message')
+    end
+  end
+
 end
+
