@@ -26,7 +26,7 @@ describe Chwink do
       expect(chwink).to have(1).errors_on(:user_id)
     end
     it "should save valid object" do
-      chwink.save
+      chwink.save!
       chwink.should be_valid
     end
     it "should have a unique name" do
