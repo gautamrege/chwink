@@ -19,7 +19,7 @@ describe ChwinksController do
     Category.create(name: 'Daily') 
     Category.create(name: 'Transport')
     Category.create(name: 'Living')
-    Category.first.chwinks.create(name: "water", user_id: @user.id, end_year: "2100")
+    Category.first.chwinks.create!(name: "water", user_id: @user.id, end_year: "2100")
     Category.last.chwinks.create(name: "tiger", user_id: @user.id, end_year: "2020")
     Category.last.chwinks.create(name: "dolphin", user_id: @user.id, end_year: "2020")
   end
