@@ -4,8 +4,8 @@ class Chwink
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Paperclip
-  #include Tire::Model::Search
-  #include Tire::Model::Callbacks
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
   
   # history tracking all Chwink documents
   # note: tracking will not work until #track_history is invoked
