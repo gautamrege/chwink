@@ -6,12 +6,14 @@ ChwinkApp::Application.routes.draw do
   match '/auth/failure', to: 'authentications#failure'
   match '/chwinks/search', to: 'chwinks#index'
   match '/categories/:category_id', to: 'chwinks#index', as: 'category_chwinks'
+  get 'search', to: 'search#index'
   
   resources :chwinks do
     get '/vote/:year', to: 'chwinks#vote'
     post '/comment', to: 'chwinks#comment'
   end
-
+  
+  
   resources :categories do
 
   end

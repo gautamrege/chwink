@@ -16,12 +16,15 @@ describe ChwinksController do
   end
   
   before(:each) do
+    Chwink.tire.index.delete
     Category.create(name: 'Daily') 
     Category.create(name: 'Transport')
     Category.create(name: 'Living')
     Category.first.chwinks.create(name: "water", user_id: @user.id, end_year: "2100")
     Category.last.chwinks.create(name: "tiger", user_id: @user.id, end_year: "2020")
     Category.last.chwinks.create(name: "dolphin", user_id: @user.id, end_year: "2020")
+    Chwink.tire.index.create
+    Chwink.tire.index.refresh
   end
 
   describe 'GET #index' do
@@ -53,7 +56,12 @@ describe ChwinksController do
       expect(assigns(:count_chwinks)).to equal(0)
       expect(response).to redirect_to root_path
     end
-
+    
+    it 'should redirect to chwink id page if chwink id is present' do
+      get :index, id: Chwink.last.id
+      expect(assigns(:count_chwinks)).to equal(1)
+      expect(response).to render_template :index
+    end
   end
 
 end

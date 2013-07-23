@@ -28,11 +28,12 @@
               /     .add-column.accordion-body.collapse#category_selection
               /       = render 'chwinks/categories'
             .span.header-elements
-              = form_for Chwink.new, :url => '/chwinks/search', :html => {:class => 'form-search header-search pull-right'}, :method => 'post' do |f|
+              = form_for Chwink.new, :url => '/chwinks/search', :html => {:class => 'form-search header-search pull-right'}, :method => 'get' do |f|
                 .input-append
                   %input.input-medium.search-query{:type => "text", :name => 'query', :id => 'query', placeholder: 'Find Chwinks'}
                   %button.btn{:type => "submit"} Search
-            
+              
+                
             .span.header-elements
               - if current_user.blank?
                 %a.btn.btn-categories{href: "#", rel: "popover", "data-content"=> "#{raw render('chwinks/login')}", title: 'Sign In'}
@@ -70,3 +71,4 @@
               %img{:src => '/assets/facebook.png'}
             %a{:href => "javascript:void(0);", :onclick => "window.open('http://twitter.com/home?status=What our children will never know  #{HOST_URL}', 'newWindow', 'width=816, height=523'); return false;"}
               %img{:src => '/assets/twitter.png'}
+      

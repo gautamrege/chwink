@@ -66,3 +66,4 @@ gem "simple_form"
 gem 'mongoid_slug'
 # Deployment
 gem 'mina'
+gem 'tire'
