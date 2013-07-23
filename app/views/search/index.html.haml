@@ -1,9 +1,0 @@
-/ %section.chwinks= render_chwinks(@chwinks)
-%section.chwinks
-  - if @chwinks.to_a.size > 0
-    - @chwinks.to_a.each do |chwink|
-      %p= chwink.name
-  - else 
-    %p 
-      Not found
-

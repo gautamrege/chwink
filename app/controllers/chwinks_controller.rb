@@ -8,8 +8,28 @@ class ChwinksController < ApplicationController
     @comments = []
     @count_chwinks = 0
     @chwinks = {"timeline" =>{"date" => []}}
+    chwinks = []
     if params[:query].blank? and params[:category_id].blank? and params[:id].blank?
       chwinks = Chwink.all
+    elsif !params[:query].blank?
+      tire_chwinks = Chwink.search(params[:query])
+    #convert tire item to chwink object
+      tire_chwinks.to_a.each do |item|
+        Chwink.all.to_a.each do|obj|
+          chwinks << obj if item.name == obj.name
+        end
+      end
+    elsif !params[:category_id].blank?
+      category = Category.find(params[:category_id])
+      chwinks = category.chwinks
+    elsif !params[:id].blank?
+      first = Chwink.find(params[:id])
+      tire_chwinks = Chwink.search(first.name)
+      Chwink.all.to_a.each do|obj|
+        chwinks << obj if tire_chwinks.to_a.first.name == obj.name
+      end
+    end
+=begin
     elsif !params[:query].blank?
       chwinks = Chwink.similar(params[:query])
     elsif !params[:category_id].blank?
@@ -17,8 +37,8 @@ class ChwinksController < ApplicationController
       chwinks = category.chwinks
     elsif !params[:id].blank?
       first = Chwink.find(params[:id])
-      chwinks = Chwink.similar(first.name)
-    end
+    chwinks = Chwink.similar(first.name)
+=end
     @count_chwinks = chwinks.count
     absolete_text = "obsoleted"
     chwinks.each do |chwink|
