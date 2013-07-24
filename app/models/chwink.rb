@@ -149,6 +149,43 @@ class Chwink
 
   #SETTINGS and MAPPING for elasticsearch
   index_name "chwink_#{Rails.env}"  
+
+  settings  analysis: {
+              filter: {
+                chwink_ngram: {
+                  type: "edgeNgram",
+                  max_gram: 15,
+                  min_gram: 2
+                },
+                my_stemmer: {
+                  type: "stemmer",
+                  name: "english"
+                }
+              },
+              analyzer: {
+                index_ngram_analyzer: {
+                  type: "custom",
+                  tokenizer: "standard",
+                  filter: ["chwink_ngram","standard","lowercase"]
+                },
+                  search_ngram_analyzer: {
+                    type: "custom",
+                    tokenizer: "standard",
+                    filter: ["standard","lowercase","my_stemmer"]
+                }
+              }
+            } do 
+        mapping 
+              indexes :name, type: 'multi_field', fields: {
+                name: {type: "string",analyzer: "search_ngram_analyzer"},
+                autocomplete: {
+                  search_analyzer: "search_ngram_analyzer", 
+                  index_analyzer: "index_ngram_analyzer",
+                  type: "string"
+                } 
+              }    
+    end
+=begin
       settings analysis: {
                   analyzer: {
                     default: {
@@ -161,12 +198,18 @@ class Chwink
         indexes :description, analyser: "snowball"
       }
     end
+=end
   
   #Search function
-  def search(query)
-    Chwink.search(per_page: 5) do
-      query { string query, default_operator: "AND" } if query.present?
-      sort { by :name } if query.blank?
+  def self.search(query)
+    tire.search(load: true) do
+      query {string 'name:' + query }
+    end
+  end
+
+  def self.autocomplete(query)
+    tire.search(load: true) do
+      query {string 'name.autocomplete:' + query }
     end
   end
 

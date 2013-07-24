@@ -12,22 +12,13 @@ class ChwinksController < ApplicationController
     if params[:query].blank? and params[:category_id].blank? and params[:id].blank?
       chwinks = Chwink.all
     elsif !params[:query].blank?
-      tire_chwinks = Chwink.search(params[:query])
-    #convert tire item to chwink object
-      tire_chwinks.to_a.each do |item|
-        Chwink.all.to_a.each do|obj|
-          chwinks << obj if item.name == obj.name
-        end
-      end
+      chwinks = Chwink.search(params[:query]).results
     elsif !params[:category_id].blank?
       category = Category.find(params[:category_id])
       chwinks = category.chwinks
     elsif !params[:id].blank?
       first = Chwink.find(params[:id])
-      tire_chwinks = Chwink.search(first.name)
-      Chwink.all.to_a.each do|obj|
-        chwinks << obj if tire_chwinks.to_a.first.name == obj.name
-      end
+      chwinks = Chwink.search(first.name).results
     end
 =begin
     elsif !params[:query].blank?
