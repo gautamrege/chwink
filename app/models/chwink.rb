@@ -183,7 +183,8 @@ class Chwink
                   index_analyzer: "index_ngram_analyzer",
                   type: "string"
                 } 
-              }    
+              }
+              indexes :description, type: 'string', analyser: "search_ngram_analyzer"
     end
 =begin
       settings analysis: {
@@ -203,13 +204,25 @@ class Chwink
   #Search function
   def self.search(query)
     tire.search(load: true) do
-      query {string 'name:' + query }
+      #query {string 'name:' + query }
+      query do
+        boolean do
+          should {string "name:#{query}" }
+          should {string "description:#{query}"}
+        end
+      end
     end
   end
 
   def self.autocomplete(query)
     tire.search(load: true) do
-      query {string 'name.autocomplete:' + query }
+      #query {string 'name.autocomplete:' + query }
+      query do
+        boolean do
+          should {string "name.autocomplete:#{query}" }
+          should {string "description:#{query}"}
+        end
+      end
     end
   end
 

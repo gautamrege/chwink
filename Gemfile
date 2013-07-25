@@ -54,6 +54,7 @@ gem "faye"#, "~> 0.8.6"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "jquery-rails"
+gem 'jquery-ui-rails'
 gem "bson_ext"
 gem "mongoid"
 gem "omniauth"#, "~> 1.0.0"

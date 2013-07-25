@@ -6,10 +6,9 @@
     = yield :stylesheets
     = javascript_include_tag "application", "http://#{request.host}:9292/faye.js"
     %script
-      var client = new Faye.Client("http://" + window.location.hostname +":9292/faye");
+      //var client = new Faye.Client("http://" + window.location.hostname +":9292/faye");
     = yield :javascripts
     = csrf_meta_tags
-
   %body
     .container-fluid
       #header.lifted-corners
@@ -30,7 +29,7 @@
             .span.header-elements
               = form_for Chwink.new, :url => '/chwinks/search', :html => {:class => 'form-search header-search pull-right'}, :method => 'get' do |f|
                 .input-append
-                  %input.input-medium.search-query{:type => "text", :name => 'query', :id => 'query', placeholder: 'Find Chwinks'}
+                  %input.input-medium.search-query{:type => "text", :name => 'query', :id => 'query', placeholder: 'Find Chwinks', autocomplete: "off"}
                   %button.btn{:type => "submit"} Search
               
                 
@@ -68,4 +67,36 @@
               %img{:src => '/assets/facebook.png'}
             %a{:href => "javascript:void(0);", :onclick => "window.open('http://twitter.com/home?status=What our children will never know  #{HOST_URL}', 'newWindow', 'width=816, height=523'); return false;"}
               %img{:src => '/assets/twitter.png'}
-      
+    :javascript
+      $(function() {
+
+        $( "#query" ).autocomplete({
+          source: function( request, response ) {
+            var postData = {
+              "query": {"query_string" : { "q": "name.autocomplete:"+request.term }}
+            };
+            console.log(JSON.stringify(postData));
+            $.ajax({
+              url: "http://localhost:9200/chwink_development/chwink/_search?q=name.autocomplete:"+request.term,
+              //url: "http://localhost:9200/chwink_development/chwink/_search?",
+              dataType: "jsonp",
+              //data: JSON.stringify(postData),
+              //contentType: 'application/json; charset=UTF-8',
+              success: function( data ) {
+                response( $.map( data.hits.hits, function( item ) {
+                  return {
+                    label: item._source.name,
+                    value: item._source.name
+                  }   
+                }));
+              }
+            });
+          },
+        minLength: 2,
+        });
+      });
+
+
+
+
+
