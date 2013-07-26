@@ -4,8 +4,9 @@
   = simple_form_for @chwink,  html: {multipart:true} do |f|
     .row-fluid
       .span4 Name *
-      .span
-        = f.input :name, label: false, input_html: {class: 'input-medium', placeholder: 'Chwink Name'}
+
+      .span.ui-widget
+        = f.input :name, label: false, input_html: {class: 'input-medium', placeholder: 'Chwink Name', autocomplete: "off", id: "new_chwink"}
     .row-fluid
       .span4 Image 
       .span2 
@@ -32,8 +33,3 @@
     .row-fluid        
       %strong Edits are obsolete ;) Create with care!
       = f.submit 'Chwink It!', class: 'btn btn-medium btn-chwink-orange btn-submit-chwink'
-        
-        
-
-
-  

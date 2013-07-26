@@ -67,36 +67,3 @@
               %img{:src => '/assets/facebook.png'}
             %a{:href => "javascript:void(0);", :onclick => "window.open('http://twitter.com/home?status=What our children will never know  #{HOST_URL}', 'newWindow', 'width=816, height=523'); return false;"}
               %img{:src => '/assets/twitter.png'}
-    :javascript
-      $(function() {
-
-        $( "#query" ).autocomplete({
-          source: function( request, response ) {
-            var postData = {
-              "query": {"query_string" : { "q": "name.autocomplete:"+request.term }}
-            };
-            console.log(JSON.stringify(postData));
-            $.ajax({
-              url: "http://localhost:9200/chwink_development/chwink/_search?q=name.autocomplete:"+request.term,
-              //url: "http://localhost:9200/chwink_development/chwink/_search?",
-              dataType: "jsonp",
-              //data: JSON.stringify(postData),
-              //contentType: 'application/json; charset=UTF-8',
-              success: function( data ) {
-                response( $.map( data.hits.hits, function( item ) {
-                  return {
-                    label: item._source.name,
-                    value: item._source.name
-                  }   
-                }));
-              }
-            });
-          },
-        minLength: 2,
-        });
-      });
-
-
-
-
-
