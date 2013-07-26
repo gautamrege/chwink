@@ -186,20 +186,6 @@ class Chwink
               }
               indexes :description, type: 'string', analyser: "search_ngram_analyzer"
     end
-=begin
-      settings analysis: {
-                  analyzer: {
-                    default: {
-                      type: 'snowball'
-                    }  
-                  }
-                } do
-      mapping {
-        indexes :name, analyzer: "snowball"
-        indexes :description, analyser: "snowball"
-      }
-    end
-=end
   
   #Search function
   def self.search(query)

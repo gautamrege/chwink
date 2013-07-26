@@ -1,15 +1,21 @@
 $(document).ready(function() {
   $( "#query, #new_chwink" ).autocomplete({
+    minLength: 2,
     source: function( request, response ) {
       var postData = {
-        "query": {"query_string" : { "q": "name.autocomplete:"+request.term }}
+          "query": { 
+            "bool": {
+              "should": [{"query_string": {"query": "name.autocomplete:"+request.term}},
+                      {"query_string": {"query": "description:"+request.term}}]
+            } 
+          },
       };
+      console.log(request.term);
       $.ajax({
-        url: "http://localhost:9200/chwink_development/chwink/_search?q=name.autocomplete:"+request.term,
-        //url: "http://localhost:9200/chwink_development/chwink/_search?",
-        dataType: "jsonp",
-        //data: JSON.stringify(postData),
-        //contentType: 'application/json; charset=UTF-8',
+        url: "http://localhost:9200/chwink_development/chwink/_search",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(postData),
         success: function( data ) {
           response( $.map( data.hits.hits, function( item ) {
             return {
@@ -20,7 +26,10 @@ $(document).ready(function() {
         }
       });
     },
-  minLength: 2,
+    messages: {
+      noResults:'' ,
+      results: function() {}
+    }
   });
 });
 
