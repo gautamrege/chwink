@@ -5,8 +5,8 @@ $(document).ready(function() {
       var postData = {
           "query": { 
             "bool": {
-              "should": [{"query_string": {"query": "name.autocomplete:"+request.term}},
-                      {"query_string": {"query": "description:"+request.term}}]
+              "should": [{"match": {"name.autocomplete":request.term}},
+                      {"match": {"description":request.term}}]
             } 
           },
       };
