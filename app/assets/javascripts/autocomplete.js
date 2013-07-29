@@ -12,7 +12,7 @@ $(document).ready(function() {
       };
       console.log(request.term);
       $.ajax({
-        url: "http://localhost:9200/chwink_development/chwink/_search",
+        url: "http://"+ window.location.hostname +":9200/chwink_development/chwink/_search",
         type: "POST",
         dataType: "json",
         data: JSON.stringify(postData),
