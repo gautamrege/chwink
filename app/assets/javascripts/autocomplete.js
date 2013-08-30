@@ -5,14 +5,14 @@ $(document).ready(function() {
       var postData = {
           "query": { 
             "bool": {
-              "should": [{"query_string": {"query": "name.autocomplete:"+request.term}},
-                      {"query_string": {"query": "description:"+request.term}}]
+              "should": [{"match": {"name.autocomplete":request.term}},
+                      {"match": {"description":request.term}}]
             } 
           },
       };
       console.log(request.term);
       $.ajax({
-        url: "http://localhost:9200/chwink_development/chwink/_search",
+        url: "http://"+ window.location.hostname +":9200/chwink_development/chwink/_search",
         type: "POST",
         dataType: "json",
         data: JSON.stringify(postData),

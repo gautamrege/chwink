@@ -193,8 +193,8 @@ class Chwink
       #query {string 'name:' + query }
       query do
         boolean do
-          should {string "name:#{query}" }
-          should {string "description:#{query}"}
+          should {match "name","#{query}" }
+          should {match "description","#{query}"}
         end
       end
     end
@@ -205,8 +205,8 @@ class Chwink
       #query {string 'name.autocomplete:' + query }
       query do
         boolean do
-          should {string "name.autocomplete:#{query}" }
-          should {string "description:#{query}"}
+          should {match "name.autocomplete","#{query}" }
+          should {match "description","#{query}"}
         end
       end
     end

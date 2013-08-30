@@ -23,8 +23,8 @@ class AuthenticationsController < ApplicationController
       end
       flash[:notice] = "Signed Succefully"
     end
-     
-    redirect_to request.env["HTTP_REFERER"] || root_url   
+    #redirect_to request.env["HTTP_REFERER"] || root_url   
+    redirect_to request.env['omniauth.origin'] || root_url   
   end
 
   def failure 
