@@ -2,7 +2,7 @@ require 'mina/bundler'
 require 'mina/rails'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
-# require 'mina/rvm'    # for rvm support. (http://rvm.io)
+require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -10,10 +10,10 @@ require 'mina/git'
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :user, 'root'
-set :domain, '173.230.149.204'
-set :deploy_to, '/var/www/chwink'
-set :repository, 'git@github.com:railsrumble/r12-team-39.git'
+set :user, 'gautam'
+set :domain, 'chwink.it'
+set :deploy_to, '/home/gautam/chwink'
+set :repository, 'git@github.com:gautamrege/chwink.git'
 set :branch, 'master'
 set :identity_file, 'keys/id_rsa_rumble' 
 
@@ -34,7 +34,7 @@ task :environment do
   # invoke :'rbenv:load'
 
   # For those using RVM, use this to load an RVM version@gemset.
-  # invoke :'rvm:use[ruby-1.9.3-p125@default]'
+  invoke :'rvm:use[1.9.3-p327]'
 end
 
 # Put any custom mkdir's in here for when `mina setup` is ran.
