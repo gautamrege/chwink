@@ -7,6 +7,7 @@ ChwinkApp::Application.routes.draw do
   match '/chwinks/search', to: 'chwinks#index'
   match '/categories/:category_id', to: 'chwinks#index', as: 'category_chwinks'
   get 'search', to: 'search#index'
+  post 'chwinks/autocomplete', to: 'chwinks#autocomplete'
   
   resources :chwinks do
     get '/vote/:year', to: 'chwinks#vote'

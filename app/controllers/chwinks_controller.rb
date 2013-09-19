@@ -145,4 +145,12 @@ class ChwinksController < ApplicationController
       chwink.vote(:up => params[:year])
     end
   end
+
+  def autocomplete
+    @data = Chwink.autocomplete(params)
+    respond_to do |format|
+      format.json{render json: @data}
+    end
+  end
+
 end
