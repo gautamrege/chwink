@@ -6,8 +6,8 @@
         %a{:href => "#{chwink_path(comment.chwink)}"} 
           = comment.chwink.name
         \:
-        %img{ :src => "#{comment.user.image}", :height => "16px", :width => "16px"}
-        = comment.user.name
+        %img{ :src => "#{comment.try(:user).image}", :height => "16px", :width => "16px"}
+        = comment.try(:user).name
         says, '
         = comment.comment
         \'  
